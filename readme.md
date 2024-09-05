@@ -1,4 +1,6 @@
-# Professor Lucas
+# Servidor HTTP para testes
+
+### Professor Lucas
 
 ## O servidor está preparado para responder requisições baseadas no padrão REST.
 
