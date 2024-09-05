@@ -1,12 +1,12 @@
 # Servidor HTTP para testes
 
-### Professor Lucas
+#### Professor Lucas
 
-## O servidor está preparado para responder requisições baseadas no padrão REST.
+O servidor está preparado para responder requisições baseadas no padrão REST.
 
-## Clone o repositório e instale as depêndencias utilizando `npm install`
+Clone o repositório e instale as depêndencias utilizando `npm install`
 
-## Para inicializar o servidor utilize o comando `npm start`
+Para inicializar o servidor utilize o comando `npm start`
 
 ## Rotas da API de Aulas
 
