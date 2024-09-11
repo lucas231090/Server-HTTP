@@ -17,3 +17,10 @@ Para inicializar o servidor utilize o comando `npm start`
 | GET        | /aulas/{id}   | Exibe a aula número "id" (show)    |
 | PUT        | /aulas/{id}   | Altera a aula número "id" (update) |
 | DELETE     | /aulas/{id}   | Remove a aula número "id" (delete) |
+
+### EXEMPLO DE ENVIO DE BODY NAS REQUISIÇÕES POST/PUT
+
+{
+	"title": "Aula teste",
+	"content": "Descrição da aula teste"
+}
