@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prof Lucas - Pratica JS</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .card {
+        background-color: #f8f9fa;
+        color: #000;
+      }
+      .card-title {
+        font-size: 1.5rem;
+      }
+      .card-subtitle {
+        font-size: 1.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center">Lista de Aulas</h1>
+      <div id="aulas" class="mt-4"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      // Consumindo a API
+      fetch("http://localhost:3000/aulas")
+        .then((response) => response.json())
+        .then((data) => {
+          const aulasContainer = document.getElementById("aulas");
+          data.forEach((aula) => {
+            const card = document.createElement("div");
+            card.className = "card mb-4";
+            card.innerHTML = `
+                        <div class="card-body">
+                            <h5 class="card-title">ID ${aula.id}</h5>
+                            <h6 class="card-subtitle mb-2">${aula.title}</h6>
+                            <p class="card-text">${aula.content}</p>
+                        </div>
+                    `;
+            aulasContainer.appendChild(card);
+          });
+        })
+        .catch((error) => console.error("Erro:", error));
+    </script>
+  </body>
+</html>

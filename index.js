@@ -1,40 +1,42 @@
-const express = require('express');
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
+const express = require("express");
+const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 let aulas = [
-  { id: 1, title: 'Aula01', content: 'Apresentação da disciplina' },
-  { id: 2, title: 'Aula02', content: 'Protocolo HTTP' },
-  { id: 3, title: 'Aula03', content: 'HTML' },
-  { id: 4, title: 'Aula04', content: 'CSS' },
-  { id: 5, title: 'Aula05', content: 'JS' },
-  { id: 6, title: 'Aula06', content: 'Prática JS' },
-  { id: 7, title: 'Aula07', content: 'Prova 1' },
+  { id: 1, title: "Aula01", content: "Apresentação da disciplina" },
+  { id: 2, title: "Aula02", content: "Protocolo HTTP" },
+  { id: 3, title: "Aula03", content: "HTML" },
+  { id: 4, title: "Aula04", content: "CSS" },
+  { id: 5, title: "Aula05", content: "JS" },
+  { id: 6, title: "Aula06", content: "Prática JS" },
+  { id: 7, title: "Aula07", content: "Prova 1" },
 ];
 
 // Swagger
 const swaggerOptions = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'API rest Didática',
-      version: '1.0.0',
-      description: 'Uma API simples para testar requisições REST.',
+      title: "API rest Didática",
+      version: "1.0.0",
+      description: "Uma API simples para testar requisições REST.",
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: "http://localhost:3000",
       },
     ],
   },
-  apis: ['./index.js'],
+  apis: ["./index.js"],
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 /**
  * @swagger
@@ -77,11 +79,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *               items:
  *                 $ref: '#/components/schemas/Post'
  */
-app.get('/', (req, res) => {
-  res.json({ message: 'Olá, você está no servidor do professor Lucas =D' });
+app.get("/", (req, res) => {
+  res.json({ message: "Olá, você está no servidor do professor Lucas =D" });
 });
 
-app.get('/aulas', (req, res) => {
+app.get("/aulas", (req, res) => {
   res.json(aulas);
 });
 
@@ -105,7 +107,7 @@ app.get('/aulas', (req, res) => {
  *             schema:
  *               $ref: '#/components/schemas/Post'
  */
-app.post('/aulas', (req, res) => {
+app.post("/aulas", (req, res) => {
   const newPost = {
     id: aulas.length + 1,
     title: req.body.title,
@@ -138,9 +140,9 @@ app.post('/aulas', (req, res) => {
  *       404:
  *         description: Aula não encontrada.
  */
-app.get('/aulas/:id', (req, res) => {
+app.get("/aulas/:id", (req, res) => {
   const post = aulas.find((p) => p.id === parseInt(req.params.id));
-  if (!post) return res.status(404).json({ message: 'Item não encontrado' });
+  if (!post) return res.status(404).json({ message: "Item não encontrado" });
   res.json(post);
 });
 
@@ -173,9 +175,9 @@ app.get('/aulas/:id', (req, res) => {
  *       404:
  *         description: Aula não encontrada.
  */
-app.put('/aulas/:id', (req, res) => {
+app.put("/aulas/:id", (req, res) => {
   const post = aulas.find((p) => p.id === parseInt(req.params.id));
-  if (!post) return res.status(404).json({ message: 'Item não encontrado' });
+  if (!post) return res.status(404).json({ message: "Item não encontrado" });
 
   post.title = req.body.title || post.title;
   post.content = req.body.content || post.content;
@@ -202,10 +204,10 @@ app.put('/aulas/:id', (req, res) => {
  *       404:
  *         description: Aula não encontrada.
  */
-app.delete('/aulas/:id', (req, res) => {
+app.delete("/aulas/:id", (req, res) => {
   const postIndex = aulas.findIndex((p) => p.id === parseInt(req.params.id));
   if (postIndex === -1)
-    return res.status(404).json({ message: 'Item não encontrado' });
+    return res.status(404).json({ message: "Item não encontrado" });
 
   aulas.splice(postIndex, 1);
   res.status(204).send();
