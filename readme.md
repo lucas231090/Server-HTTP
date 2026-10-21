@@ -1,7 +1,5 @@
 # Servidor HTTP para testes
 
-#### Professor Lucas
-
 O servidor está preparado para responder requisições baseadas no padrão REST.
 
 Clone o repositório e instale as dependências utilizando `npm install`
